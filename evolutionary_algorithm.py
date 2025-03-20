@@ -14,30 +14,26 @@ ALPHA_SY = "MDVFMKGLSKAKEGVVAAAEKTKQGVAEAAGKTKEGVLYVGSKTKEGVVHGVATVAEKTKEQVTNVGG
 #  pop_i = [[random.choi(POSSIBLE_AA) for _ in range(m)] for _ in range(cen)]
 #  return pop_i
 
-def initialize_population(n, m, alpha_seq):
-    """
-    Generate a population of mutated Alpha-Synuclein sequences.
-
-    Args:
-    - n (float): Percentage of amino acids to mutate (0-100).
-    - m (int): Length of each sequence (e.g., 55 AA).
-    - alpha_seq (str): Amino acid sequence of Alpha-Synuclein.
-
-    Returns:
-    - list: A list of mutated sequences.
-    """
-    population_size = m  # Number of mutated sequences to generate
-    num_mutations = int(len(alpha_seq) * (n / 100))  # Calculate the number of mutations
+def initialize_population(n, m, alpha_seq, nac_start=61, nac_end=95):
+    population_size = m
+    num_mutations = int((nac_end - nac_start) * (n / 100))
     population = []
 
     for _ in range(population_size):
-        mutated_seq = list(alpha_seq)  # Convert sequence to a list for mutability
-        mutation_indices = random.sample(range(len(alpha_seq)), num_mutations)  # Select mutation positions
+        mutated_seq = list(alpha_seq)
+
+        # Randomly select indices for mutations
+        mutation_indices = random.sample(range(nac_start, nac_end), num_mutations)
+
         for index in mutation_indices:
-            # Ensure the new amino acid is different from the original
+            # Choose a new amino acid different from the current one
             new_aa = random.choice([aa for aa in POSSIBLE_AA if aa != mutated_seq[index]])
+
+            # Apply the mutation
             mutated_seq[index] = new_aa
-        population.append("".join(mutated_seq))  # Add mutated sequence to the population
+
+        # Append the mutated sequence to the population list
+        population.append("".join(mutated_seq))
 
     return population
 
@@ -144,5 +140,5 @@ def optimize_molecule(num_gen, pop_size, aa_len, sel_str, mut_rate):
     return pop, likelihoods
 
 
-optimize_molecule(1, 5, 55, 1, 130)
+optimize_molecule(1, 5, 55, 1, 2)
 
