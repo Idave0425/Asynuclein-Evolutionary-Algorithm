@@ -91,9 +91,9 @@ def generate_mutated_fasta(original_fasta_path, mutated_sequence, output_fasta_p
 def calculate_specificity(individual):
     # Generate Mutated Fasta
     aa_sequence_str = ''.join(individual)
-    generate_mutated_fasta('/Users/ishandave/Documents/asynuclein_evoalgo/original_asyn.fasta', aa_sequence_str)
+    generate_mutated_fasta('/workspaces/asynuclein_evoalgo1/original_asyn.fasta', aa_sequence_str)
     # Build Pic Command
-    pic_command = "python ./pic_specificity_algorithm/mi_smart_filters.py -f1 /Users/ishandave/Documents/asynuclein_evoalgo/original_asyn.fasta -f2 /Users/ishandave/Documents/asynuclein_evoalgo/mutated.fasta -p1 SNCA -p2 SNCA_M -g v -m Homo_sapiens -s /Users/ishandave/Documents/asynuclein_evoalgo/interactingProteins.tsv"
+    pic_command = "python ./pic_specificity_algorithm/mi_smart_filters.py -f1 /workspaces/asynuclein_evoalgo1/original_asyn.fasta -f2 /workspaces/asynuclein_evoalgo1/mutated.fasta -p1 SNCA -p2 SNCA_M -g v -m Homo_sapiens -s /workspaces/asynuclein_evoalgo1/interactingProteins.tsv"
     ## Call Pic command
     os.system(pic_command)
     specificity_score = get_likelihood_of_interaction('interactingProteins.tsv')
