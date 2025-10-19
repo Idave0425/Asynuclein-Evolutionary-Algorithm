@@ -41,15 +41,15 @@ python main.py
 
 Check the repository for example scripts, sample data, or notebooks for demonstration purposes.
 
-## Repository Structure
+## Project Structure
 
-```
-├── main.py                # Entry point for evolutionary algorithm
-├── asynuclein/            # Modules/functions related to Asynuclein simulation
-├── evolutionary/          # Evolutionary algorithm core components
-├── requirements.txt       # Python dependencies
-├── README.md              # Project documentation
-```
+- `pic_specificity_algorithm/` — contains helper modules and filters for mutual information (MI) specificity scoring
+- `evolutionary_algorithm.py` — main script that performs sequence mutation, evaluation, and selection
+- `interactingProteins.tsv` — dataset of known interacting proteins used for scoring and filtering
+- `original_asyn.fasta` — base alpha-synuclein FASTA sequence used as the starting point for mutation
+- `mutated.fasta` — output file containing evolved candidate protein sequences
+- `requirements.txt` — list of dependencies (e.g., Biopython, NumPy, Pandas)
+- `README.md` — project documentation
 
 ## Contributing
 
